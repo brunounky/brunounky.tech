@@ -1,4 +1,4 @@
- "use client";
+"use client";
 
  import React, { useState, useEffect } from 'react';
  import Image from "next/image";
@@ -118,22 +118,30 @@
 
 
  const TypingEffect = ({ roles }) => {
-  const [index, setIndex] = useState(0);
-  const [subIndex, setSubIndex] = useState(0);
-  const [reverse, setReverse] = useState(false);
+    const [index, setIndex] = useState(0);
+    const [subIndex, setSubIndex] = useState(0);
+    const [reverse, setReverse] = useState(false);
 
-  useEffect(() => {
-    if (subIndex === roles [index].length + 1 && !reverse) {
-      setTimeout(() => setReverse(true), 1500); return;
-    }
-    if (subIndex === 0 && reverse) {
-      setReverse(false); setIndex((prev) => (prev + 1) % roles.length); return;
-    }
-    const timeout = setTimeout(() => { setSubIndex((prev) => prev + (reverse ? -1 : 1)); }, reverse ? 75 : 150);
-    return () => clearTimeout(timeout);
-  }, [subIndex, index, reverse, roles]);
+    useEffect(() => {
+        if (!reverse && subIndex === roles[index].length) {
+            setTimeout(() => setReverse(true), 1500);
+            return;
+        }
 
-  return <span className={styles.heroRole}>{`${roles [index].substring(0, subIndex)}`}</span>;
+        if (reverse && subIndex === 0) {
+            setReverse(false);
+            setIndex((prev) => (prev + 1) % roles.length);
+            return;
+        }
+
+        const timeout = setTimeout(() => {
+            setSubIndex((prev) => prev + (reverse ? -1 : 1));
+        }, reverse ? 75 : 150);
+
+        return () => clearTimeout(timeout);
+    }, [subIndex, index, reverse, roles]);
+
+    return <span className={styles.heroRole}>{`${roles[index].substring(0, subIndex)}`}</span>;
  };
 
  const ProjectFilter = ({ categories, selectedCategory, onSelectCategory }) => {
@@ -242,4 +250,3 @@
     </div>
   );
  }
- 
