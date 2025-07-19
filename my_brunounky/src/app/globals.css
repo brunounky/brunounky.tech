@@ -9,8 +9,27 @@
   --text-medium: #94a3b8;
   --text-dark: #64748b;
   --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--bg-dark);
+  color: var(--text-medium);
+  font-family: var(--font-sans);
+  padding-top: 60px;
+}
+
+main {
+  animation: fadeIn 1s ease-out;
 }
 
 @keyframes fadeIn {
@@ -31,10 +50,4 @@
   to {
     border-right-color: transparent;
   }
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
